@@ -23,7 +23,7 @@ spring:
       port: 8080
 logging:
   level:
-    org.activiti.engine.impl.persisitence.entity: trace
+    org.activiti.engine.impl.persisitence.entity: info
 server:
   servlet:
     context-path: "/activityApi"

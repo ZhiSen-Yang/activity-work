@@ -7,8 +7,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableDiscoveryClient
-@EnableFeignClients
-@ComponentScan("com.example.demo.*")
+@EnableFeignClients(basePackages = {"com.example.demo.feign"})
+//@ComponentScan("com.example.demo.*")
 @SpringBootApplication
 public class DemoApplication {
 

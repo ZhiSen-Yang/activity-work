@@ -46,7 +46,11 @@ public class ModelController {
     public void createModel(HttpServletRequest request, HttpServletResponse response) throws Exception{
         modelService.createModel(request,response);
     }
-
+    @GetMapping("/test")
+    public String test(@RequestParam(value = "key") String key, @RequestParam(value = "businessKey") String businessKey) throws Exception{
+     log.info("feign进来了");
+       return "测试feign";
+    }
 
     /**
      * 编辑查看模型
