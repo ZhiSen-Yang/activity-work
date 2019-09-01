@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: demo
+server:
+  port: 6006
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:6002/eureka/
+feign:
+  hystrix:
+    enable: true

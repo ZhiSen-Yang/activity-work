@@ -1,0 +1,84 @@
+spring:
+#  数据库配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/main?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8&serverTimezone=CTT
+    username: root
+    password: 123456   
+  application:
+    name: activity-api
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  main:
+    allow-bean-definition-overriding: true
+    #  端口配置
+    server:
+      tomcat:
+        uri-encoding: UTF-8
+      servlet:
+        session:
+          timeout: 100
+      port: 8080
+logging:
+  level:
+    org.activiti.engine.impl.persisitence.entity: trace
+server:
+  servlet:
+    context-path: "/activityApi"
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://localhost:6002/eureka/
+  instance:
+    ip-address: 127.0.0.1 #强制指定IP地址，默认会获取本机的IP地址
+    instance-id: 127.0.0.1:${server.port}
+    prefer-ip-address: true
+    registerWithEureka: false
+    fetchRegistry: false
+  boot:
+    admin:
+      client:
+        url: "http://192.168.1.202:8000"
+
+#feign 配置
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+        loggerLevel: full
+# 断路器配置
+hystrix:
+  metrics:
+    enabled: true    
+  command:    
+    default:    
+      execution:    
+        isolation:
+          strategy: SEMAPHORE    
+          semaphore: 
+            maxConcurrentRequests: 100
+          thread:    
+            timeoutInMilliseconds: 50000 #缺省为1000 
+      fallback: 
+        isolation: 
+          semaphore: 
+            maxConcurrentRequests: 100
+# 开放健康检查接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+# 负载均衡配置
+ribbon:
+  eureka:
+    enabled: true  

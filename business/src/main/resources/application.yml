@@ -1,0 +1,9 @@
+server:
+  port: 6004
+spring:
+  application:
+    name: activity-business
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:6002/eureka/
